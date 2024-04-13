@@ -4,6 +4,23 @@ import './App.css';
 function distance(point1, point2) {
   return Math.sqrt((point1.x - point2.x) ** 2 + (point1.y - point2.y) ** 2);
 }
+const comp=(p1,p2)=>{
+  if(p1.x===p2.x && p2.y===p1.y)
+  return 1;
+else
+return 0;
+}
+const checker=(pt1,pt2,pt3,pt4)=>{
+  
+  if((comp(pt1,pt3) && comp(pt2,pt4) )|| (comp(pt1,pt4) && comp(pt2,pt3)))
+  {
+    return true;
+  }
+
+  return false;
+  
+        
+}
 function Draw(){
   const [coordinatesArray, setCoordinatesArray] = useState([]);
   const [grid,setgrid]=useState([]);
@@ -17,11 +34,35 @@ function Draw(){
       setgrid(prevgrid=>([...prevgrid,[value2,value1]]))
     }
   },[coordinatesArray])
+  const checkfunc=(newPoint)=>{
+    
+    const len=coordinatesArray.length;
+    const len2=grid.length;
+    console.log(len);
+    if(len===0)return true;
+   
+    const prevPoint=coordinatesArray[len-1];
+    if(newPoint.x===prevPoint.x && newPoint.y===prevPoint.y)return false;
+    if(len2===0)return 1;
+    for(const existingPoint of grid)
+    {
+        
+        if(checker(existingPoint[0],existingPoint[1],newPoint,prevPoint))
+        {
+          return false;
+        }
+        
+    }
+    
+
+   
+    return true;
+  }
   const handleClick = (event) => {
     if (event.button === 0) { // Check if left mouse button is clicked
       const { clientX, clientY } = event;
       let newPoint = { x: clientX, y: clientY };
-
+     
       // Check if new point is close to any existing point
      
       for (const existingPoint of coordinatesArray) {
@@ -30,13 +71,15 @@ function Draw(){
           break;
         }
       }
-
-        
+      if(checkfunc(newPoint))
+      {
         setCoordinatesArray(prevArray => [...prevArray, newPoint]);
-       
-        
-      
-    }
+      }
+      else{
+        alert("Wrong Move");
+      }
+   
+  }
   };
 
   return (
