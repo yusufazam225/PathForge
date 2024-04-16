@@ -6,6 +6,7 @@ return <React.Fragment>
         <form>
             <label>Email:</label>
             <input/>
+            <button>none</button>
             <button>Next</button>
         </form>
     </div>
