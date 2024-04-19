@@ -3,12 +3,7 @@ import React from "react"
 const Register=()=>{
 return <React.Fragment>
     <div>
-        <form>
-            <label>Email:</label>
-            <input/>
-            
-            <button>Next</button>
-        </form>
+       <h1>login</h1>
     </div>
 </React.Fragment>
 }

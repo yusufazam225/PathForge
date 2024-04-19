@@ -3,13 +3,13 @@ import User from './../models/user.model.js'
 const router=express.Router();
 router.post('/register',async(req,res)=>{
     try{
-    const {email,password}=req.body;
+    const {email,password,username}=req.body;
     const existingUser=await User.findOne({email});
     if(existingUser)
     {
         return res.status(400).json({ message: 'Email already registered' });
     }
-    const newUser=new User({email,password});
+    const newUser=new User({email,password,username});
     await newUser.save();
     res.status(200).json({message:'new user joined',user:newUser});
     }catch(error)

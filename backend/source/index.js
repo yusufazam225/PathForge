@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import connectDB from './db/index.js';
 import router from './routes/user.js';
+import login from './routes/user.login.js'
 dotenv.config({
     path:'./.env'
 })
@@ -10,7 +11,7 @@ app.use(express.json())
 
 
 app.use('/api/users',router);
-
+app.use('/api/users',login);
 connectDB().then(()=>{
     app.listen(process.env.PORT||8000,()=>{
         
