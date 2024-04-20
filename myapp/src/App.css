@@ -1,46 +1,17 @@
-form {
-    max-width: 400px;
-    margin: 0 auto;
-  }
+.Home{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+    align-items: center;
+    height:60vh;
   
-  /* Style labels */
-  label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-    color: #333;
-  }
+}
+.Home button{
+  padding: 20px;
+  margin: 80px;
+}
+.Navbar{
+  display: flex;
   
-  /* Style inputs */
-  input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
-  }
-  
-  /* Change input border color on focus */
-  input:focus {
-    outline: none;
-    border-color: #007bff;
-  }
-  
-  /* Style submit button */
-  button {
-    width: 100%;
-    padding: 12px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Change button background color on hover */
-  button:hover {
-    background-color: #0056b3;
-  }
+  padding-left: 10px;
+}
