@@ -12,7 +12,7 @@ router.post('/smtp',(req,res)=>{
             secure: false, // Use `true` for port 465, `false` for all other ports
             auth: {
               user: "justforcoding225@gmail.com",
-              pass: "xsmtpsib-d721cf0bb9d70c71ed967799b6a4ed59551bba4dc0511e30ab01d8219192adb7-1BPXFqMJ6bE3a90k",
+              pass: `${Process.env.SMTP_PASSWORD}`,
             },
           });
           
