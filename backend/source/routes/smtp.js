@@ -8,11 +8,11 @@ router.post('/smtp',(req,res)=>{
        
         const transporter = nodemailer.createTransport({
             host: "smtp-relay.brevo.com",
-            port: 587,
+            port: process.env.SMTP_PORT,
             secure: false, // Use `true` for port 465, `false` for all other ports
             auth: {
               user: "justforcoding225@gmail.com",
-              pass: `${Process.env.SMTP_PASSWORD}`,
+              pass: `${process.env.SMTP_PASSWORD}`,
             },
           });
           
