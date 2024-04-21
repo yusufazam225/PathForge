@@ -4,10 +4,11 @@ const router=express.Router();
 router.post('/register',async(req,res)=>{
     try{
     const {email,password,username}=req.body;
+      
     const existingUser=await User.findOne({email});
     if(existingUser)
     {
-        return res.status(400).json({ message: 'Email already registered' });
+        return res.status(203).json({ message: 'Email already registered' });
     }
     const newUser=new User({email,password,username});
     await newUser.save();
@@ -15,7 +16,7 @@ router.post('/register',async(req,res)=>{
     }catch(error)
     {
         console.log(`error is in registration:${error}`);
-        res.status(400).json({error:`error registration:${error.message}`});
+        res.status(404).json({error:`error registration:${error.message}`});
     }
 
 })

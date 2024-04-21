@@ -7,6 +7,8 @@ import Login from './pages/Login'
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider,createBrowserRouter,createRoutesFromElements,Route} from 'react-router-dom';
 import Register from './pages/Register.js'
+import OTP from './pages/OTP.js'
+import Register2 from './pages/Register.2.js'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router=createBrowserRouter(
@@ -15,6 +17,9 @@ const router=createBrowserRouter(
       <Route path='' element={<Home/>}/>
       <Route path='login' element={<Login/>}/>
       <Route path='register' element={<Register/>}/>
+      <Route path='register2' element={<Register2/>}/>
+      <Route path='OTP' element={<OTP/>}/>
+
     </Route>
   )
 )
