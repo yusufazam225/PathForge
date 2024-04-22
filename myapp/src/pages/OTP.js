@@ -17,9 +17,9 @@ const OTP=()=>{
         }
     }
 return <React.Fragment>
-    <div>
-        <input value={otp} onChange={(e)=>setotp(e.target.value)}/>
-        <button onClick={checker}>Enter</button>
+    <div className="login">
+        <input className="button-85" placeholder="Enter OTP" value={otp} onChange={(e)=>setotp(e.target.value)}/>
+        <button className="button-85" onClick={checker}>Enter</button>
     </div>
 </React.Fragment>
 }

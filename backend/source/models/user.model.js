@@ -15,7 +15,11 @@ userSchema.methods.GenerateAccessTokens=async function(){
             _id:this._id,
             email:this._email,
             username:this._username
-        }
+        },
+        process.env.SECRET_KEY,
+        
+            { expiresIn: '1d' }
+        
 
     )
 }

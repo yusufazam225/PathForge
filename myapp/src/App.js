@@ -1,16 +1,19 @@
 import React from 'react';
 import {Outlet} from 'react-router-dom';
 import './App.css';
-import Draw from './draw';
-import Register from './pages/Register.js';
-import Login from './pages/Login.js';
+
 import Navbar from './Navbar.js';
+
+import OTP from './pages/OTP.js'
+import Register from './home.js';
 
 function App() {
   return <React.Fragment>
 
         <Navbar/>
+        
         <Outlet/>
+       
         
     
   </React.Fragment>

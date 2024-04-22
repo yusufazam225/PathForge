@@ -20,21 +20,21 @@ const Register2=()=>{
         }
         if(response.status===200)
         {
-            console.log('cool');
+            navigate('/');
         }
 
     }
 return <React.Fragment>
-    <div>
-        <form>
-            <label>Username:</label>
-            <input value={username} onChange={(e)=>setusername(e.target.value)}/>
-            <label>Password:</label>
-            <input value={password} onChange={(e)=>setpassword(e.target.value)}/>
-            <button onClick={submitdetails}>Register</button>
+    
+        <form className="login">
+            
+            <input className="button-85" placeholder="Username" value={username} onChange={(e)=>setusername(e.target.value)}/>
+           
+            <input className="button-85" placeholder="Password" value={password} onChange={(e)=>setpassword(e.target.value)}/>
+            <button className="button-85" onClick={submitdetails}>Register</button>
         </form>
     
-    </div>
+   
 </React.Fragment>
 }
 export default Register2;

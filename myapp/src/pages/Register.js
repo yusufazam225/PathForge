@@ -21,25 +21,32 @@ const Register=()=>{
         e.preventDefault();
         const randomNumber=generateRandomNumber();
         
-
+        if(!email)
+        {
+            alert("error");
+        }
+        else
+        {
         await axios.post('http://localhost:8000/api/users/smtp',{email:email,otp:randomNumber}).then((response)=>{
             console.log(`${response.data.email}`);
             navigate('/OTP',{state:{OTP:randomNumber,EMAIL:email}});
         }).catch((error)=>{
+            alert("Wrong Email");
             console.log(`error in smtp:${error}`)
         })
-       
+    }
 
 
     }
 return <React.Fragment>
-    <div>
+    <div className="register">
         <form>
-            <label>Email:</label>
-            <input type="text" placeholder="Email" value={email} onChange={(e)=>setemail(e.target.value)}/>
-            
-            <button onClick={ClickFunction} >Next</button>
+            <label>Email:&nbsp;</label>
+            <input type="text" className="button-85" placeholder="Email" value={email} onChange={(e)=>setemail(e.target.value)}/>
+            &nbsp;
+            <button className="button-85" onClick={ClickFunction} >Next</button>
         </form>
+        
     <p>Already have an account?<Link to="/login">Login</Link></p>
     </div>
 </React.Fragment>

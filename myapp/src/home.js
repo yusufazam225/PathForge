@@ -4,8 +4,8 @@ import './App.css'
 const Register=()=>{
 return <React.Fragment>
     <div className="Home">
-      <button>Solve Puzzle</button>
-      <button>Contribute</button>
+      <button className="button-85">Solve Puzzle</button>
+      <button className="button-85">Contribute</button>
     </div>
 </React.Fragment>
 }
