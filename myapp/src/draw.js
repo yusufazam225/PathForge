@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
-import './App.css';
+import React, { useEffect, useState ,useContext} from "react";
+import { useNavigate} from "react-router-dom";
+import axios from "axios";
+import UserContext from './context/UserContext'
 
 function distance(point1, point2) {
   return Math.sqrt((point1.x - point2.x) ** 2 + (point1.y - point2.y) ** 2);
@@ -22,16 +24,24 @@ const checker=(pt1,pt2,pt3,pt4)=>{
         
 }
 function Draw(){
+  const {userinfo}=useContext(UserContext);
   const [coordinatesArray, setCoordinatesArray] = useState([]);
   const [grid,setgrid]=useState([]);
+  const navigate=useNavigate();
+  const insert=(e)=>{
+    e.preventDefault();
+   
+    axios.post('http://localhost:8000/api/users/insertpoints',{coordinatesArray,grid,userinfo}).catch((error)=>console.log(`error in draw:${error}`));
+    navigate('/');
+  }
  
   useEffect(()=>{
     const len=coordinatesArray.length;
     if(len>1)
     {
-      const value1=coordinatesArray[len-1];
-      const value2=coordinatesArray[len-2];
-      setgrid(prevgrid=>([...prevgrid,[value2,value1]]))
+      const startPoint=coordinatesArray[len-1];
+      const endPoint=coordinatesArray[len-2];
+      setgrid(prevgrid=>([...prevgrid,{startPoint,endPoint}]))
     }
   },[coordinatesArray])
   const checkfunc=(newPoint)=>{
@@ -47,7 +57,7 @@ function Draw(){
     for(const existingPoint of grid)
     {
         
-        if(checker(existingPoint[0],existingPoint[1],newPoint,prevPoint))
+        if(checker(existingPoint.startPoint,existingPoint.endPoint,newPoint,prevPoint))
         {
           return false;
         }
@@ -61,7 +71,8 @@ function Draw(){
   const handleClick = (event) => {
     if (event.button === 0) { // Check if left mouse button is clicked
       const { clientX, clientY } = event;
-      let newPoint = { x: clientX, y: clientY };
+      let newPoint = { x: clientX, y: clientY-72 };
+      
      
       // Check if new point is close to any existing point
      
@@ -114,6 +125,7 @@ function Draw(){
           }
         })}
       </svg>
+      <button className="button-85" style={{marginTop:'700px',marginLeft:'900px'}}onClick={insert}>submit</button>
      
     </div>
   );

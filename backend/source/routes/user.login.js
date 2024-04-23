@@ -3,9 +3,11 @@ import User from '../models/user.model.js';
 const router=express.Router();
 
 
-const genratetokens=async(userid)=>{
+const genratetokens=async(_id)=>{
+    
     try{
-        const user=await User.findOne({userid});
+        const user=await User.findOne({_id});
+        
         const AccessToken=user.GenerateAccessTokens();
         return AccessToken;
     }
@@ -18,21 +20,26 @@ const genratetokens=async(userid)=>{
 
 router.post('/login',async(req,res)=>{
     try{
-        const {password,entry}=req.body;
+        const {password,email}=req.body;
         
-        const Userentry=User.findOne({entry});
+        const Userentry=await User.findOne({email});
+        
+      
         if(!Userentry)
         {
+           
           return  res.status(400).json({message:"user doesnt exist"});
         }
-        const isPasswordValid=await User.isPasswordCorrect(password);
+        const isPasswordValid=await Userentry.isPasswordCorrect(password);
+        console.log(isPasswordValid);
+        const username=Userentry.username;
         if(!isPasswordValid)
         {
             return res.status(400).json({message:"invalid password"});
         }
         const token=await genratetokens(Userentry._id);
         res.cookie('token',token,{httpOnly:true,maxAge:3600000});
-        res.status(200).json({message:`login succesfull ${email}`})
+        res.status(200).json({message:`login succesfull ${email}`,username,token})
         
 
     }
@@ -41,3 +48,4 @@ router.post('/login',async(req,res)=>{
     }
 })
 export default router;
+

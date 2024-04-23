@@ -17,9 +17,9 @@ router.post('/smtp',(req,res)=>{
           });
           
           // async..await is not allowed in global scope, must use a wrapper
-          function main() {
+         async function main() {
             // send mail with defined transport object
-            const info =  transporter.sendMail({
+            const info = await transporter.sendMail({
               from: 'Admin@gmail.com', // sender address
               to: `${email}`, // list of receivers
               subject: "Hello ✔", // Subject line
@@ -30,24 +30,22 @@ router.post('/smtp',(req,res)=>{
             console.log("Message sent: %s", info.messageId);
             // Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
           }
-          var flag=null;
+         
             main().catch((error)=>{
-              flag=1;
+              
               console.log(`error in smtp sending:${error}`);
              
               
             })
-          console.log(flag);console.log(flag);
-            if(flag)
-            res.status(400).send({email});
-            else
-             res.status(200).send({email});
+      
+             return res.status(200).send({email});
 
           
           
     }
     catch(error)
     {
+    
         console.log(`error in smtp backend:${error}`);
     }
 })

@@ -1,16 +1,35 @@
 
-import React from "react"
-import { Link } from "react-router-dom";
-const Register=()=>{
+import axios from "axios";
+import React, { useState ,useContext} from "react"
+import { Link ,useNavigate} from "react-router-dom";
+import UserContext from "../context/UserContext";
+const Login=()=>{
+    const navigate=useNavigate();
+    const [email,setemail]=useState('');
+    const [password,setpassword]=useState('');
+    const {setuserinfo}=useContext(UserContext);
+    const [direct,setdirect]=useState(false);
+    const login=async(e)=>{
+        e.preventDefault();
+     await axios.post('http://localhost:8000/api/users/login',{email,password}).then((response)=>{
+        setuserinfo(response.data.username);
+        setdirect(true)}).catch((error)=>console.log(error));
+       
+    }
+    if(direct)
+    {
+        return navigate('/');
+    }
+    
 return <React.Fragment>
     <div className="login">
        <h1>Login</h1>
-       <input className="button-85" placeholder="Username or Email"/>
+       <input className="button-85" placeholder="Email" value={email} onChange={(e)=>setemail(e.target.value)}/>
      
-       <input className="button-85" placeholder="Password"/>
+       <input className="button-85" placeholder="Password" value={password} onChange={(e)=>setpassword(e.target.value)}/>
        
-       <button className="button-85">Login</button>
+       <button className="button-85" onClick={login}>Login</button>
     </div>
 </React.Fragment>
 }
-export default Register;
+export default Login;

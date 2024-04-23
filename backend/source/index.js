@@ -6,7 +6,8 @@ import login from './routes/user.login.js';
 import smtp from './routes/smtp.js';
 import profile from './routes/profile.js';
 import cors from 'cors';
-
+import display from './routes/display.js';
+import insertpoints from './routes/insertpoints.js'
 dotenv.config({
     path:'./.env'
 })
@@ -14,7 +15,8 @@ dotenv.config({
 const app=express();
 app.use(cors());
 app.use(express.json())
-
+app.use('/api/users',display);
+app.use('/api/users',insertpoints);
 app.use('/api/users',smtp);
 app.use('/api/users',router);
 app.use('/api/users',login);

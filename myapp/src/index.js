@@ -9,6 +9,8 @@ import { RouterProvider,createBrowserRouter,createRoutesFromElements,Route} from
 import Register from './pages/Register.js'
 import OTP from './pages/OTP.js'
 import Register2 from './pages/Register.2.js'
+import Draw from  './draw.js';
+import Display from './display.js'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router=createBrowserRouter(
@@ -19,6 +21,8 @@ const router=createBrowserRouter(
       <Route path='register' element={<Register/>}/>
       <Route path='register2' element={<Register2/>}/>
       <Route path='OTP' element={<OTP/>}/>
+      <Route path='draw' element={<Draw/>}/>
+      <Route path='display' element={<Display/>}/>
 
     </Route>
   )
