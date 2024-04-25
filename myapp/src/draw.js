@@ -63,14 +63,13 @@ function Draw(){
         }
         
     }
-    
-
-   
     return true;
   }
   const handleClick = (event) => {
+
     if (event.button === 0) { // Check if left mouse button is clicked
       const { clientX, clientY } = event;
+      if(clientX>=950)return;
       let newPoint = { x: clientX, y: clientY-72 };
       
      
@@ -94,7 +93,8 @@ function Draw(){
   };
 
   return (
-    <div onClick={handleClick} style={{ height: '100vh', position: 'relative' }}>
+    <div onClick={handleClick} style={{ height: '100vh', position: 'relative' }} >
+       <h1 style={{marginLeft:'300px'}}>Draw here</h1>
       <svg style={{ position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}>
         {coordinatesArray.map((coordinate, index) => (
           <circle
@@ -124,8 +124,13 @@ function Draw(){
             return null; // If it's the first coordinate, no line to draw
           }
         })}
+           <line x1="950" y1="0" x2="950" y2="100%" stroke="black" strokeWidth="2" />
       </svg>
-      <button className="button-85" style={{marginTop:'700px',marginLeft:'900px'}}onClick={insert}>submit</button>
+      <div style={{marginTop:'300px',marginLeft:'1000px'}}>
+      <input className="button-85" placeholder="Name your Puzzle" />
+      &nbsp;
+      <button className="button-85" onClick={insert}>submit</button>
+      </div>
      
     </div>
   );

@@ -11,6 +11,8 @@ import OTP from './pages/OTP.js'
 import Register2 from './pages/Register.2.js'
 import Draw from  './draw.js';
 import Display from './display.js'
+import Displaypoints from './diplaypoints.js';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const router=createBrowserRouter(
@@ -23,6 +25,7 @@ const router=createBrowserRouter(
       <Route path='OTP' element={<OTP/>}/>
       <Route path='draw' element={<Draw/>}/>
       <Route path='display' element={<Display/>}/>
+      <Route path='displaypoints' element={<Displaypoints/>}/>
 
     </Route>
   )
@@ -30,6 +33,7 @@ const router=createBrowserRouter(
 root.render(
   <React.StrictMode>
     <RouterProvider router={router}/>
+   
   </React.StrictMode>
 );
 
