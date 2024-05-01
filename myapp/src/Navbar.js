@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useEffect } from "react"
 import {Link} from "react-router-dom"
 import axios from 'axios';
 import UserContext from './context/UserContext'
@@ -10,6 +10,15 @@ const Navbar=()=>{
     axios.post('http://localhost:8000/api/users/logout').catch((error)=>console.log(error));
     setuserinfo(null);
   }
+  useEffect(()=>{
+    
+    axios.get('http://localhost:8000/api/users/profile',{
+      withCredentials:true
+    }).then((response)=>setuserinfo(response.info.username)).catch((error)=>console.log(error));
+   
+  })
+
+
 return <React.Fragment>
  
  <div className="navbar">

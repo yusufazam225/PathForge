@@ -4,11 +4,13 @@
   justify-content: center;
     align-items: center;
     height:60vh;
-  
+    
 }
 .Home button{
-  padding: 20px;
-  margin: 80px;
+  font-size: 40px;
+  padding: 50px;
+  margin: 100px;
+
 }
 
 
@@ -189,3 +191,115 @@
 
 
 
+
+.neon-cursor {
+  width: 20px;
+  height: 20px;
+  background-color:blue;
+  border: 2px solid #00ff00;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  animation: neon-glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes neon-glow {
+  0% {
+    box-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00;
+  }
+  100% {
+    box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+  }
+}
+
+
+
+
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  position: relative;
+  color: white;
+}
+
+.container .label {
+  font-size: 15px;
+  padding-left: 10px;
+  position: absolute;
+  top: 13px;
+  transition: 0.3s;
+  pointer-events: none;
+}
+
+.input {
+  width: 200px;
+  height: 45px;
+  border: none;
+  outline: none;
+  padding: 0px 7px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 15px;
+  background-color: transparent;
+  box-shadow: 3px 3px 10px rgba(0,0,0,1),
+  -1px -1px 6px rgba(255, 255, 255, 0.4);
+}
+
+.input:focus {
+  border: 2px solid transparent;
+  color: #fff;
+  box-shadow: 3px 3px 10px rgba(0,0,0,1),
+  -1px -1px 6px rgba(255, 255, 255, 0.4),
+  inset 3px 3px 10px rgba(0,0,0,1),
+  inset -1px -1px 6px rgba(255, 255, 255, 0.4);
+}
+
+.container .input:valid ~ .label,
+.container .input:focus ~ .label {
+  transition: 0.3s;
+  padding-left: 2px;
+  transform: translateY(-35px);
+}
+
+.container .input:valid,
+.container .input:focus {
+  box-shadow: 3px 3px 10px rgba(0,0,0,1),
+  -1px -1px 6px rgba(255, 255, 255, 0.4),
+  inset 3px 3px 10px rgba(0,0,0,1),
+  inset -1px -1px 6px rgba(255, 255, 255, 0.4);
+}
+
+
+
+.text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 100px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Three columns with equal width */
+  gap: 20px; /* Gap between grid items */
+  padding: 20px; /* Padding for the grid container */
+}
+
+.grid-item {
+  background: linear-gradient(135deg, #8e2de2, #4a00e0); /* Gradient background */
+  border-radius: 10px; /* Rounded corners for grid items */
+  padding: 20px; /* Padding for grid items */
+  text-align: center; /* Center align text */
+  color: white; /* Text color */
+  cursor:pointer;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Box shadow for grid items */
+  transition: transform 0.3s ease-in-out; /* Smooth transition */
+}
+
+.grid-item:hover {
+  transform: scale(1.05); /* Scale grid item on hover */
+}

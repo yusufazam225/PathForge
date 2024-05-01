@@ -7,17 +7,19 @@ const Login=()=>{
     const navigate=useNavigate();
     const [email,setemail]=useState('');
     const [password,setpassword]=useState('');
-    const {setuserinfo}=useContext(UserContext);
+    const {setuserinfo,settoken}=useContext(UserContext);
     const [direct,setdirect]=useState(false);
     const login=async(e)=>{
         e.preventDefault();
      await axios.post('http://localhost:8000/api/users/login',{email,password}).then((response)=>{
         setuserinfo(response.data.username);
+        settoken(response.data.token);
         setdirect(true)}).catch((error)=>console.log(error));
        
     }
     if(direct)
     {
+      
         return navigate('/');
     }
     

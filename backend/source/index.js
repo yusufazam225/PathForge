@@ -7,13 +7,16 @@ import smtp from './routes/smtp.js';
 import profile from './routes/profile.js';
 import cors from 'cors';
 import display from './routes/display.js';
-import insertpoints from './routes/insertpoints.js'
+import insertpoints from './routes/insertpoints.js';
+import cookieParser from 'cookie-parser';
 dotenv.config({
     path:'./.env'
 })
 
 const app=express();
-app.use(cors());
+app.use(cors({origin:'http://localhost:3000',credentials:true}));
+app.use(cookieParser());
+
 app.use(express.json())
 app.use('/api/users',display);
 app.use('/api/users',insertpoints);

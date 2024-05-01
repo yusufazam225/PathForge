@@ -3,6 +3,7 @@ import {useLocation} from 'react-router-dom';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PaintbrushCursor from "./Paintbrushcurson";
  
 
 function distance(point1, point2) {
@@ -55,8 +56,7 @@ const Displaypoints=()=>{
       e.preventDefault();
       let cnt=0;
       const len=grid.length;
-      console.log(carr);
-      console.log(newgrid);
+      
       carr.map((givenPoint,index)=>
       {
         if(index>0)
@@ -78,7 +78,7 @@ const Displaypoints=()=>{
       }
       })
      
-      console.log(cnt,len);
+     
     
      
 
@@ -175,7 +175,7 @@ const Displaypoints=()=>{
           setnewgrid(prevnewgrid => [...prevnewgrid, newPoint]);
         }
         else{
-          alert("Wrong Move");
+          toast.warning("Wrong Move");
         }
      
     }
@@ -189,7 +189,7 @@ const Displaypoints=()=>{
 
 
 return <React.Fragment>
-    <div onClick={handleClick} style={{ height: '100vh', position: 'relative' }}>
+    <div onClick={handleClick} style={{ height: '100vh', position: 'relative',backgroundColor:'black' }}>
      
      <svg style={{ position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}>
         {coordinatesArray.map((coordinate, index) => (
@@ -231,6 +231,15 @@ return <React.Fragment>
             fill="red"
           />
         ))}
+        {newgrid.map((coordinate, index) => (
+          <circle
+            key={index}
+            cx={coordinate.x}
+            cy={coordinate.y}
+            r="10"
+            fill="green"
+          />
+        ))}
 
 
 
@@ -245,7 +254,7 @@ return <React.Fragment>
                 y1={prevCoordinate.y}
                 x2={coordinate.x}
                 y2={coordinate.y}
-                stroke="red"
+                stroke="green"
                 strokeWidth="2"
               />
             );
@@ -254,11 +263,12 @@ return <React.Fragment>
           }
         })}
 
-<line x1="950" y1="0" x2="950" y2="100%" stroke="black" strokeWidth="2" />
+<line x1="950" y1="0" x2="950" y2="100%" stroke="white" strokeWidth="2" />
 
 
       </svg>
      <button className="button-85" onClick={checkaccuracy} style={{marginTop:'800px',marginLeft:'900px'}}>submit</button>
+     <PaintbrushCursor/>
       </div>
       <ToastContainer
       position="top-center"

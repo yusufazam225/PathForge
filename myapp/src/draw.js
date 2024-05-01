@@ -1,7 +1,9 @@
-import React, { useEffect, useState ,useContext} from "react";
+import React, { useEffect, useState ,useContext,useRef} from "react";
 import { useNavigate} from "react-router-dom";
 import axios from "axios";
 import UserContext from './context/UserContext'
+import PaintbrushCursor from "./Paintbrushcurson";
+import html2canvas from 'html2canvas';
 
 function distance(point1, point2) {
   return Math.sqrt((point1.x - point2.x) ** 2 + (point1.y - point2.y) ** 2);
@@ -25,13 +27,14 @@ const checker=(pt1,pt2,pt3,pt4)=>{
 }
 function Draw(){
   const {userinfo}=useContext(UserContext);
+  
   const [coordinatesArray, setCoordinatesArray] = useState([]);
   const [grid,setgrid]=useState([]);
   const navigate=useNavigate();
-  const insert=(e)=>{
-    e.preventDefault();
+  const insert=(imageData)=>{
    
-    axios.post('http://localhost:8000/api/users/insertpoints',{coordinatesArray,grid,userinfo}).catch((error)=>console.log(`error in draw:${error}`));
+   
+    axios.post('http://localhost:8000/api/users/insertpoints',{coordinatesArray,grid,userinfo,imageData}).catch((error)=>console.log(`error in draw:${error}`));
     navigate('/');
   }
  
@@ -65,12 +68,59 @@ function Draw(){
     }
     return true;
   }
+
+
+
+
+
+
+
+  const [capturedImage, setCapturedImage] = useState(null);
+  const screenshotRef = useRef(null);
+
+  const takeScreenshot = () => {
+    html2canvas(screenshotRef.current,{x:0,y:70,width:950,height: 700}).then((canvas) => {
+      const imageData = canvas.toDataURL('image/png');
+      setCapturedImage(imageData); // Store the captured image data in state
+      insert(imageData);
+    });
+  };
+
+  const uploadScreenshot = (imageData) => {
+    // Here you would implement your upload logic
+    // For demonstration purposes, I'm just logging the base64 data
+    console.log('Uploaded screenshot:', imageData);
+  };
+
+
+
+
+
+
+
+
+
   const handleClick = (event) => {
 
     if (event.button === 0) { // Check if left mouse button is clicked
       const { clientX, clientY } = event;
-      if(clientX>=950)return;
-      let newPoint = { x: clientX, y: clientY-72 };
+
+      const svgElement = document.querySelector('svg');
+        
+      if (!svgElement) return;
+  
+      // Get the position and dimensions of the SVG element
+      const svgRect = svgElement.getBoundingClientRect();
+  
+      // Calculate the relative coordinates within the SVG element
+      const relativeX = clientX - svgRect.left;
+      const relativeY = clientY - svgRect.top;
+      if(relativeX>=950)return;
+      let newPoint = { x: relativeX, y: relativeY };
+
+
+    
+      
       
      
       // Check if new point is close to any existing point
@@ -93,8 +143,8 @@ function Draw(){
   };
 
   return (
-    <div onClick={handleClick} style={{ height: '100vh', position: 'relative' }} >
-       <h1 style={{marginLeft:'300px'}}>Draw here</h1>
+    <div ref={screenshotRef} onClick={handleClick} style={{ height: '100vh', position: 'relative' ,backgroundColor:"black"}} >
+       <h1 style={{marginLeft:'300px', color:'white'}}>Draw here</h1>
       <svg style={{ position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}>
         {coordinatesArray.map((coordinate, index) => (
           <circle
@@ -124,15 +174,25 @@ function Draw(){
             return null; // If it's the first coordinate, no line to draw
           }
         })}
-           <line x1="950" y1="0" x2="950" y2="100%" stroke="black" strokeWidth="2" />
+           <line x1="950" y1="0" x2="950" y2="100%" stroke="white" strokeWidth="2" />
       </svg>
-      <div style={{marginTop:'300px',marginLeft:'1000px'}}>
-      <input className="button-85" placeholder="Name your Puzzle" />
-      &nbsp;
-      <button className="button-85" onClick={insert}>submit</button>
+      
+   
+   
+
+      <button  className="button-85" style={{marginTop:'300px',marginLeft:'1000px'}} onClick={takeScreenshot}>submit</button>
+    
+
+      {capturedImage && (
+      <div>
+        
+        <img src={capturedImage} alt="Captured" />
       </div>
-     
+    )}
+      <PaintbrushCursor/>
+
     </div>
+   
   );
 }
 export default Draw; 

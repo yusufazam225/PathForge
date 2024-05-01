@@ -20,11 +20,11 @@ const Display=()=>{
   
 return <React.Fragment>
  
- <div >
+ <div className="grid-container">
      {arr.map((data)=>{
-       return <div key={data._id}>
-        <h1>{data.userinfo}</h1>
-        <button onClick={()=>navigateto(data.coordinatesArray,data.grid)}>clickme</button>
+       return <div className="grid-item" key={data._id}>
+        <img src={data.imageData} style={{height:'300px',width:'300px'}}  onClick={()=>navigateto(data.coordinatesArray,data.grid)}/>
+        <p>{data.userinfo}</p>
         </div>
      })}
     </div>

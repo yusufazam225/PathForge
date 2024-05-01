@@ -5,12 +5,13 @@ import User from './../models/points.model.js'
 const router=express.Router();
 router.post('/insertpoints',async(req,res)=>{
     try{
-    const {grid,coordinatesArray,userinfo}=req.body;
+    const {grid,coordinatesArray,userinfo,imageData}=req.body;
 
     const newUser = await User.create({  
         grid,
         coordinatesArray,
-        userinfo
+        userinfo,
+        imageData
     })
     
 }catch(error){

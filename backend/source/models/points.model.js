@@ -17,7 +17,8 @@ const PointSchema = new mongoose.Schema({
   const DrawingSchema = new mongoose.Schema({
     coordinatesArray: [PointSchema], // Array of points
     grid: [LineSegmentSchema], // Array of line segments
-    userinfo:{type:String,required:true}
+    userinfo:{type:String,required:true},
+    imageData:{type:String,required:true}
   });
   
   // Define model for the drawing

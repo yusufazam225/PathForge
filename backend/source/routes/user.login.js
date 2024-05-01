@@ -8,7 +8,7 @@ const genratetokens=async(_id)=>{
     try{
         const user=await User.findOne({_id});
         
-        const AccessToken=user.GenerateAccessTokens();
+        const AccessToken=await user.GenerateAccessTokens();
         return AccessToken;
     }
     catch(error)
@@ -38,7 +38,11 @@ router.post('/login',async(req,res)=>{
             return res.status(400).json({message:"invalid password"});
         }
         const token=await genratetokens(Userentry._id);
-        res.cookie('token',token,{httpOnly:true,maxAge:3600000});
+  
+        res.cookie('token',token,{httpOnly:true,maxAge:3600000})
+        
+
+
         res.status(200).json({message:`login succesfull ${email}`,username,token})
         
 
