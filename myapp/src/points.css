@@ -21,8 +21,8 @@
     top: 50%;
     transform: rotate(0) translateX(-50%) translateY(-50%);
     transform-origin: 0 0;
-    width: 200%;
-    height: 200%;
+    width: 300%;
+    height: 300%;
     background: repeating-conic-gradient(hsl(0, 50%, 40%), hsl(0, 50%, 50%) 1%);
     content: '';
     animation: rotation 20s infinite linear;
