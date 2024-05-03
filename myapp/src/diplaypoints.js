@@ -4,7 +4,7 @@ import {useLocation} from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PaintbrushCursor from "./Paintbrushcurson";
- 
+import { VscDebugRestart } from "react-icons/vsc";
 
 function distance(point1, point2) {
 
@@ -34,12 +34,19 @@ const checker=(pt1,pt2,pt3,pt4)=>{
 }
 
 
+
 const Displaypoints=()=>{
     const {state}=useLocation();
     const {coordinatesArray,grid}=state;
     const [newgrid,setnewgrid]=useState([]);
   
     const [carr,setcarr]=useState([]);
+
+
+    const nullvalue=()=>{
+  setnewgrid([]);
+ 
+    }
     useEffect(()=>{
       coordinatesArray.map((coordinate, index) => 
         {
@@ -163,7 +170,7 @@ const Displaypoints=()=>{
         }
         if(flag)
         {
-          toast.warning("wrong move");
+         
           return ;
         }
           
@@ -267,7 +274,8 @@ return <React.Fragment>
 
 
       </svg>
-     <button className="button-85" onClick={checkaccuracy} style={{marginTop:'800px',marginLeft:'900px'}}>submit</button>
+     <button className="button-29" onClick={checkaccuracy} style={{marginTop:'750px',marginLeft:'880px',width:'150px',height:'80px',fontSize:'30px'}}>submit</button>
+     <button  className="button-29" style={{marginTop:'0px',marginLeft:'0px',height:'50px',width:'100px',fontSize:'30px'}} onClick={nullvalue}><VscDebugRestart/></button>
      <PaintbrushCursor/>
       </div>
       <ToastContainer

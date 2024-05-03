@@ -4,6 +4,11 @@ import axios from "axios";
 import UserContext from './context/UserContext'
 import PaintbrushCursor from "./Paintbrushcurson";
 import html2canvas from 'html2canvas';
+import { VscDebugRestart } from "react-icons/vsc";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 function distance(point1, point2) {
   return Math.sqrt((point1.x - point2.x) ** 2 + (point1.y - point2.y) ** 2);
@@ -86,18 +91,11 @@ function Draw(){
     });
   };
 
-  const uploadScreenshot = (imageData) => {
-    // Here you would implement your upload logic
-    // For demonstration purposes, I'm just logging the base64 data
-    console.log('Uploaded screenshot:', imageData);
-  };
 
-
-
-
-
-
-
+const nullvalue=()=>{
+  setgrid([]);
+  setCoordinatesArray([]);
+}
 
 
   const handleClick = (event) => {
@@ -136,13 +134,13 @@ function Draw(){
         setCoordinatesArray(prevArray => [...prevArray, newPoint]);
       }
       else{
-        alert("Wrong Move");
+        toast.warning("Wrong Move");
       }
    
   }
   };
 
-  return (
+  return <React.Fragment>
     <div ref={screenshotRef} onClick={handleClick} style={{ height: '100vh', position: 'relative' ,backgroundColor:"black"}} >
        <h1 style={{marginLeft:'300px', color:'white'}}>Draw here</h1>
       <svg style={{ position: 'absolute', top: 0, left: 0, height: '100%', width: '100%' }}>
@@ -180,9 +178,9 @@ function Draw(){
    
    
 
-      <button  className="button-85" style={{marginTop:'300px',marginLeft:'1000px'}} onClick={takeScreenshot}>submit</button>
-    
-
+      
+      <button  className="button-29" style={{marginTop:'0px',marginLeft:'950px',height:'50px',width:'100px',fontSize:'30px'}} onClick={nullvalue}><VscDebugRestart/></button>
+      <button  className="button-29" style={{marginTop:'600px',marginLeft:'950px',height:'100px',width:'200px',fontSize:'30px'}} onClick={takeScreenshot}>Submit</button>
       {capturedImage && (
       <div>
         
@@ -192,7 +190,19 @@ function Draw(){
       <PaintbrushCursor/>
 
     </div>
-   
-  );
+    <ToastContainer
+      position="top-center"
+      autoClose={5000}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="light"
+     
+      />
+    </React.Fragment>
 }
 export default Draw; 

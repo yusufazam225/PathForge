@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react"
 import {Link} from "react-router-dom"
 import axios from 'axios';
 import UserContext from './context/UserContext'
+import { FaHome } from "react-icons/fa";
 import './App.css'
 const Navbar=()=>{
   const {userinfo,setuserinfo}=useContext(UserContext);
