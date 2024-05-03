@@ -13,7 +13,7 @@ const Navbar=()=>{
   }
   useEffect(()=>{
     
-    axios.get('http://localhost:8000/api/users/profile',{
+    axios.get('https://pathforge.onrender.com/api/users/profile',{
       withCredentials:true
     }).then((response)=>setuserinfo(response.info.username)).catch((error)=>console.log(error));
    

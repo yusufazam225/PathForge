@@ -12,7 +12,7 @@ const Login=()=>{
     const [direct,setdirect]=useState(false);
     const login=async(e)=>{
         e.preventDefault();
-     await axios.post('http://localhost:8000/api/users/login',{email,password}).then((response)=>{
+     await axios.post('https://pathforge.onrender.com/api/users/login',{email,password}).then((response)=>{
         setuserinfo(response.data.username);
         settoken(response.data.token);
         setdirect(true)}).catch((error)=>console.log(error));

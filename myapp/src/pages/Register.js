@@ -28,7 +28,7 @@ const Register=()=>{
         }
         else
         {
-        await axios.post('http://localhost:8000/api/users/smtp',{email:email,otp:randomNumber}).then((response)=>{
+        await axios.post('https://pathforge.onrender.com/api/users/smtp',{email:email,otp:randomNumber}).then((response)=>{
             console.log(`${response.data.email}`);
             navigate('/OTP',{state:{OTP:randomNumber,EMAIL:email}});
         }).catch((error)=>{

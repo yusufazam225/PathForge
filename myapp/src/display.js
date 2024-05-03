@@ -12,7 +12,7 @@ const Display=()=>{
     navigate('/displaypoints',{state:{coordinatesArray,grid}});
  }
     useEffect(()=>{
-        axios.get('http://localhost:8000/api/users/display').then((response)=>setarr(response.data)).catch((error)=>console.log(error));
+        axios.get('https://pathforge.onrender.com/api/users/display').then((response)=>setarr(response.data)).catch((error)=>console.log(error));
         
     },[]);
    

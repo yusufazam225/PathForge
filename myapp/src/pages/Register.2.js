@@ -12,7 +12,7 @@ const Register2=()=>{
     const [password,setpassword]=useState('');
     const submitdetails=async(e)=>{
         e.preventDefault();
-        const response=await axios.post('http://localhost:8000/api/users/register',{email,username,password}).catch((error)=>{
+        const response=await axios.post('https://pathforge.onrender.com/api/users/register',{email,username,password}).catch((error)=>{
         console.log(error);
         });
         

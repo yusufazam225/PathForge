@@ -39,7 +39,7 @@ function Draw(){
   const insert=(imageData)=>{
    
    
-    axios.post('http://localhost:8000/api/users/insertpoints',{coordinatesArray,grid,userinfo,imageData}).catch((error)=>console.log(`error in draw:${error}`));
+    axios.post('https://pathforge.onrender.com/api/users/insertpoints',{coordinatesArray,grid,userinfo,imageData}).catch((error)=>console.log(`error in draw:${error}`));
     navigate('/');
   }
  
