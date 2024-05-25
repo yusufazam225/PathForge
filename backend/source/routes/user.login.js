@@ -3,19 +3,19 @@ import User from '../models/user.model.js';
 const router=express.Router();
 
 
-const genratetokens=async(_id)=>{
+// const genratetokens=async(_id)=>{
     
-    try{
-        const user=await User.findOne({_id});
+//     try{
+//         const user=await User.findOne({_id});
         
-        const AccessToken=await user.GenerateAccessTokens();
-        return AccessToken;
-    }
-    catch(error)
-    {
-        console.log(`something went wrong during generating tokens:${error}`)
-    }
-}
+//         const AccessToken= user.GenerateAccessTokens();
+//         return AccessToken;
+//     }
+//     catch(error)
+//     {
+//         console.log(`something went wrong during generating tokens:${error}`)
+//     }
+// }
 
 
 router.post('/login',async(req,res)=>{
@@ -31,17 +31,15 @@ router.post('/login',async(req,res)=>{
           return  res.status(400).json({message:"user doesnt exist"});
         }
         const isPasswordValid=await Userentry.isPasswordCorrect(password);
-        console.log(isPasswordValid);
         const username=Userentry.username;
         if(!isPasswordValid)
         {
             return res.status(400).json({message:"invalid password"});
         }
-        const token=await genratetokens(Userentry._id);
-  
-        res.cookie('token',token,{httpOnly:true,maxAge:3600000})
+      //  const token=await genratetokens(Userentry._id);
+      const token=await Userentry.GenerateAccessTokens();
         
-
+        // res.cookie('token',token,{httpOnly:true,secure:true})
 
         res.status(200).json({message:`login succesfull ${email}`,username,token})
         

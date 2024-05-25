@@ -12,12 +12,13 @@ const Display=()=>{
     navigate('/displaypoints',{state:{coordinatesArray,grid}});
  }
     useEffect(()=>{
-        axios.get('https://pathforge.onrender.com/api/users/display').then((response)=>setarr(response.data)).catch((error)=>console.log(error));
+        
+        axios.get(`${process.env.REACT_APP_PORT}/api/users/display`).then((response)=>setarr(response.data)).catch((error)=>console.log(error));
         
     },[]);
    
   
-  
+   
 return <React.Fragment>
  
  <div className="grid-container">

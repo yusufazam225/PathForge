@@ -2,20 +2,19 @@ import express from 'express';
 import jwt from 'jsonwebtoken';
 const router=express.Router();
 router.get("/profile",(req,res)=>{
-    
-//    console.log(req.cookies);
-    const {token}=req.cookies;
-  
+    const token = req.headers['authorization'].split(' ')[1];
+   
+    console.log("----->",token)
     try{
-        jwt.verify(token,process.env.SECRET_KEY,{},(err,info)=>{
-            if(err) throw err;
-            console.log("success")
-            res.status(200).json(info);
-        })
+       const decodeData = jwt.verify(token,process.env.SECRET_KEY,)
+       res.status(200).json({username:decodeData.username})
     }
     catch(error)
     {
-        res.status(400).send(`wrong in profile`)
+        console.log(error)
+        res.status(400).send({
+            error:error.message,
+        });
     }
 })
 export default router;

@@ -12,7 +12,7 @@ const Register2=()=>{
     const [password,setpassword]=useState('');
     const submitdetails=async(e)=>{
         e.preventDefault();
-        const response=await axios.post('https://pathforge.onrender.com/api/users/register',{email,username,password}).catch((error)=>{
+        const response=await axios.post(`${process.env.REACT_APP_PORT}/api/users/register`,{email,username,password}).catch((error)=>{
         console.log(error);
         });
         
@@ -41,7 +41,7 @@ return <React.Fragment>
 
       <div class="inputBox"> 
 
-       <input type="text" required  value={username} onChange={(e)=>setusername(e.target.value)} /> <i>Email</i> 
+       <input type="text" required  value={username} onChange={(e)=>setusername(e.target.value)} /> <i>Username</i> 
 
       </div> 
 

@@ -23,7 +23,7 @@
     transform-origin: 0 0;
     width: 300%;
     height: 300%;
-    background: repeating-conic-gradient(hsl(0, 50%, 40%), hsl(0, 50%, 50%) 1%);
+    background: repeating-conic-gradient(hsl(108, 76%, 26%), hsl(99, 79%, 29%) 1%);
     content: '';
     animation: rotation 20s infinite linear;
   }

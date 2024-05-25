@@ -12,9 +12,10 @@ const Login=()=>{
     const [direct,setdirect]=useState(false);
     const login=async(e)=>{
         e.preventDefault();
-     await axios.post('https://pathforge.onrender.com/api/users/login',{email,password}).then((response)=>{
+     await axios.post(`${process.env.REACT_APP_PORT}/api/users/login`,{email,password}).then((response)=>{
         setuserinfo(response.data.username);
         settoken(response.data.token);
+        localStorage.setItem('token',response.data.token)
         setdirect(true)}).catch((error)=>console.log(error));
        
     }
@@ -24,7 +25,7 @@ const Login=()=>{
     if(direct)
     {
       
-        return navigate('/');
+        navigate('/');
     }
 
    

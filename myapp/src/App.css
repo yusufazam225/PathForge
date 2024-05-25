@@ -290,7 +290,7 @@
 }
 
 .grid-item {
-  background: linear-gradient(135deg, #8e2de2, #4a00e0); /* Gradient background */
+  background: linear-gradient(135deg, #0d7632, #18b320); /* Gradient background */
   border-radius: 10px; /* Rounded corners for grid items */
   padding: 20px; /* Padding for grid items */
   text-align: center; /* Center align text */
@@ -350,3 +350,4 @@
   box-shadow: #3c4fe0 0 3px 7px inset;
   transform: translateY(2px);
 }
+
