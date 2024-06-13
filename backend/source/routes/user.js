@@ -20,6 +20,7 @@ router.post('/register',async(req,res)=>{
         username
     })
     
+    
     res.status(200).json({message:'new user joined',user:newUser});
     }catch(error)
     {

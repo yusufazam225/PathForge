@@ -8,7 +8,8 @@ const userSchema=new mongoose.Schema({
     
 });
 userSchema.pre("save",async function (next){
-this.password=bcrypt.hash(this.password,10)
+this.password= await bcrypt.hash(this.password,10)
+// console.log("inserted");
 next()
 })
 userSchema.methods.isPasswordCorrect=async function(password){
@@ -26,7 +27,6 @@ userSchema.methods.GenerateAccessTokens=function(){
         
             { expiresIn:process.env.EXPIRY }
         
-
     )
 }
 
