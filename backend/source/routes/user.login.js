@@ -20,9 +20,9 @@ const router=express.Router();
 
 router.post('/login',async(req,res)=>{
     try{
-        const {password,email}=req.body;
+        const {password,username}=req.body;
         
-        const Userentry=await User.findOne({email});
+        const Userentry=await User.findOne({username});
         
       
         if(!Userentry)
@@ -31,9 +31,10 @@ router.post('/login',async(req,res)=>{
           return  res.status(400).json({message:"user doesnt exist"});
         }
         const isPasswordValid=await Userentry.isPasswordCorrect(password);
-        const username=Userentry.username;
+        const Username=Userentry.username;
         if(!isPasswordValid)
         {
+         
             return res.status(400).json({message:"invalid password"});
         }
       //  const token=await genratetokens(Userentry._id);
@@ -41,7 +42,7 @@ router.post('/login',async(req,res)=>{
         
         // res.cookie('token',token,{httpOnly:true,secure:true})
 
-        res.status(200).json({message:`login succesfull ${email}`,username,token})
+        res.status(200).json({message:`login succesfull ${username}`,Username,token})
         
 
     }

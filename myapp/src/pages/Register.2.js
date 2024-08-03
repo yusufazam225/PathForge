@@ -2,6 +2,8 @@
 import axios from "axios";
 import React, { useState } from "react"
 import './../login.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import {useLocation,useNavigate} from 'react-router-dom';
 const Register2=()=>{
@@ -14,11 +16,12 @@ const Register2=()=>{
         e.preventDefault();
         const response=await axios.post(`${process.env.REACT_APP_PORT}/api/users/register`,{email,username,password}).catch((error)=>{
         console.log(error);
+        toast.error("user already exist");
         });
         
         if(response.status===203)
         {
-            alert('user already exists');
+           toast.warning("user already exist");
         }
         if(response.status===200)
         {
@@ -70,7 +73,18 @@ return <React.Fragment>
   </section>
     </div>
     
-   
+    <ToastContainer
+    position="top-center"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="light"
+  />
 </React.Fragment>
 }
 export default Register2;

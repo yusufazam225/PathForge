@@ -4,19 +4,21 @@ import React, { useState ,useContext} from "react"
 import { Link ,useNavigate} from "react-router-dom";
 import UserContext from "../context/UserContext";
 import './../login.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Login=()=>{
     const navigate=useNavigate();
-    const [email,setemail]=useState('');
+    const [username,setusername]=useState('');
     const [password,setpassword]=useState('');
     const {setuserinfo,settoken}=useContext(UserContext);
     const [direct,setdirect]=useState(false);
     const login=async(e)=>{
         e.preventDefault();
-     await axios.post(`${process.env.REACT_APP_PORT}/api/users/login`,{email,password}).then((response)=>{
+     await axios.post(`${process.env.REACT_APP_PORT}/api/users/login`,{username,password}).then((response)=>{
         setuserinfo(response.data.username);
         settoken(response.data.token);
         localStorage.setItem('token',response.data.token)
-        setdirect(true)}).catch((error)=>console.log(error));
+        setdirect(true)}).catch((error)=>console.log(error),toast.error("User does not exist"));
        
     }
     const signup=()=>{
@@ -43,7 +45,7 @@ return <React.Fragment>
 
       <div class="inputBox"> 
 
-       <input type="text" required  value={email} onChange={(e)=>setemail(e.target.value)} /> <i>Email</i> 
+       <input type="text" required  value={username} onChange={(e)=>setusername(e.target.value)} /> <i>Username</i> 
 
       </div> 
 
@@ -71,6 +73,18 @@ return <React.Fragment>
 
   </section>
     </div>
+    <ToastContainer
+    position="top-center"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="light"
+  />
 </React.Fragment>
 }
 export default Login;
