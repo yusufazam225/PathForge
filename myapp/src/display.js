@@ -10,8 +10,13 @@ const Display = () => {
 
   const navigate = useNavigate();
 
-  const navigateTo = (coordinatesArray, grid) => {
-    navigate('/displaypoints', { state: { coordinatesArray, grid } });
+  const navigateTo = (coordinatesArray) => {
+    const carr = coordinatesArray.map(coordinate => {
+      const cx = coordinate.x + 0.5;
+      const cy = coordinate.y;
+      return { x: cx, y: cy };
+    });
+    navigate('/displaypoints', { state: { coordinatesArray,carr } });
   };
 
   useEffect(() => {
@@ -44,7 +49,7 @@ const Display = () => {
         {arr.map((data) => {
           return (
             <div className="grid-item" key={data._id}>
-              <img src={data.imageData} style={{ height: '300px', width: '300px' }} onClick={() => navigateTo(data.coordinatesArray, data.grid)} />
+              <img src={data.imageData} style={{ height: '300px', width: '300px' }} onClick={() => navigateTo(data.coordinatesArray)} />
               <p>{data.userinfo}</p>
             </div>
           );

@@ -18,7 +18,7 @@ const Login=()=>{
         setuserinfo(response.data.username);
         settoken(response.data.token);
         localStorage.setItem('token',response.data.token)
-        setdirect(true)}).catch((error)=>console.log(error),toast.error("User does not exist"));
+        setdirect(true)}).catch((error)=>{error?toast.error("User does not exist"):toast.success("Login Success")});
        
     }
     const signup=()=>{
@@ -26,7 +26,7 @@ const Login=()=>{
     }
     if(direct)
     {
-      toast.success("Login Successfully");
+      
         navigate('/');
     }
 

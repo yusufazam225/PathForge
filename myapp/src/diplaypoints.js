@@ -17,27 +17,15 @@ const checker = (pt1, pt2, pt3, pt4) => (
 
 const Displaypoints = () => {
   const { state } = useLocation();
-  const { coordinatesArray, grid } = state;
+  const { coordinatesArray,carr } = state;
   const [newgrid, setnewgrid] = useState([]);
-  const [carr, setcarr] = useState([]);
+  
 
   const nullvalue = () => {
     setnewgrid([]);
   };
 
-  useEffect(() => {
-    const svgElement = document.querySelector('svg');
-    if (!svgElement) return;
-
-    const svgRect = svgElement.getBoundingClientRect();
-    const centerX = svgRect.width / 2;
-
-    coordinatesArray.forEach(coordinate => {
-      const cx = coordinate.x+0.5;
-      const cy = coordinate.y ;
-      setcarr(prev => [...prev, { x: cx, y: cy }]);
-    });
-  }, [coordinatesArray]);
+  
 
   const checkaccuracy = (e) => {
     e.preventDefault();
@@ -53,7 +41,7 @@ const Displaypoints = () => {
        
         carr.forEach((coordinate, index) => {
          
-          if (index > 0 && 2*index<len) {
+          if (index > 0 ) {
             const prev = carr[index - 1];
            
             if (checker(coordinate, prev, givenprevpoint, givenPoint)) {
@@ -65,7 +53,7 @@ const Displaypoints = () => {
       }
     });
     console.log(cnt,len2,len);
-    if (len2*2 === len && cnt==len2-1) {
+    if (len2 === len && cnt==len2-1) {
       toast.success("passed");
     } else {
       toast.error("Wrong");
