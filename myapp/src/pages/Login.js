@@ -26,7 +26,7 @@ const Login=()=>{
     }
     if(direct)
     {
-      
+      toast.success("Login Successfully");
         navigate('/');
     }
 

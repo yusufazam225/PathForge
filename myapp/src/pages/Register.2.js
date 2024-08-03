@@ -25,6 +25,7 @@ const Register2=()=>{
         }
         if(response.status===200)
         {
+            toast.success("Registration Successfull");
             navigate('/');
         }
 
