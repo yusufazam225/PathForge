@@ -9,6 +9,7 @@ import cors from 'cors';
 import display from './routes/display.js';
 import insertpoints from './routes/insertpoints.js';
 import cookieParser from 'cookie-parser';
+
 dotenv.config({
     path:'./.env'
 })
@@ -28,6 +29,7 @@ app.use('/api/users',smtp);
 app.use('/api/users',router);
 app.use('/api/users',login);
 app.use('/api/users',profile);
+console.log(process.env.PORT)
 connectDB().then(()=>{
     app.listen(process.env.PORT||8000,()=>{
         
