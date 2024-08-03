@@ -1,18 +1,20 @@
 
 import React, { useState } from "react"
 import { useLocation,useNavigate} from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const OTP=()=>{
     const [otp,setotp]=useState('');
     const {state}=useLocation();
     const {OTP,EMAIL}=state;
     const navigate=useNavigate();
     const checker=()=>{
-        console.log(OTP);
         if(otp==OTP)
         {
             navigate('/register2',{state:{email:EMAIL}});
         }
         else{
+            toast.error("wrong otp");
             console.log('error');
         }
     }
@@ -54,6 +56,18 @@ return <React.Fragment>
 
   </section>
     </div>
+     <ToastContainer
+     position="top-center"
+     autoClose={5000}
+     hideProgressBar={false}
+     newestOnTop={false}
+     closeOnClick
+     rtl={false}
+     pauseOnFocusLoss
+     draggable
+     pauseOnHover
+     theme="light"
+   />
 </React.Fragment>
 }
 export default OTP;

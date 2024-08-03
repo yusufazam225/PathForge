@@ -6,13 +6,13 @@ import "./../login.css";
 const Register = () => {
   const navigate = useNavigate();
   const [email, setemail] = useState("");
-
   const generateRandomNumber = () => {
     const min = 1000; // Minimum 6-digit number
     const max = 9999; // Maximum 6-digit number
     const newRandomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
     return newRandomNumber;
   };
+  
   const ClickFunction = async (e) => {
     e.preventDefault();
     const randomNumber = generateRandomNumber();
